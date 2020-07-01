@@ -26,6 +26,8 @@ describe('API Routes', () => {
         });
     });
 
+    after(() => knex.destroy());
+
     describe('GET /api/v1/shows', () => {
         it('should return all shows', (done) => {
             chai.request(server)
