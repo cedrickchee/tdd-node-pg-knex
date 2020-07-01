@@ -3,6 +3,7 @@ process.env.NODE_ENV = 'test'; // sets the NODE_ENV to test so that the correct 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
+const knex = require('../db/knex');
 
 // We are using the should assertion style. This is a personal preference.
 // You could also use expect or assert.
@@ -12,6 +13,22 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('API Routes', () => {
+    beforeEach((done) => {
+        knex.migrate.rollback().then(() => {
+            knex.migrate.latest().then(() => {
+                return knex.seed.run().then(() => {
+                    done();
+                });
+            });
+        });
+    });
+
+    afterEach((done) => {
+        knex.migrate.rollback().then(() => {
+            done();
+        });
+    });
+
     describe('GET /api/v1/shows', () => {
         it('should return all shows', (done) => {
             chai.request(server)
