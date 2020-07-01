@@ -52,4 +52,27 @@ describe('API Routes', () => {
                 });
         });
     });
+
+    describe('GET /api/v1/shows/:id', () => {
+        it('should return a single show', (done) => {
+            chai.request(server)
+                .get('/api/v1/shows/1')
+                .end((err, res) => {
+                    res.should.have.status(200);
+                    res.should.be.json;
+                    res.body.should.be.a('object');
+                    res.body.should.have.property('name');
+                    res.body.name.should.equal('Suits');
+                    res.body.should.have.property('channel');
+                    res.body.channel.should.equal('USA Network');
+                    res.body.should.have.property('genre');
+                    res.body.genre.should.equal('Drama');
+                    res.body.should.have.property('rating');
+                    res.body.rating.should.equal(3);
+                    res.body.should.have.property('explicit');
+                    res.body.explicit.should.equal(false);
+                    done();
+                });
+        });
+    });
 });

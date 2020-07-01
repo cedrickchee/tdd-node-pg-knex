@@ -14,6 +14,11 @@ function getAll() {
     return Shows().select();
 }
 
+function getSingle(showID) {
+    return Shows().where('id', parseInt(showID)).first();
+}
+
 module.exports = {
     getAll,
+    getSingle,
 };
