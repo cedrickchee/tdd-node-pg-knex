@@ -6,7 +6,8 @@
     "start": "node ./bin/www",
     "debug": "DEBUG=myapp:* npm start",
     "requirements-check": "node scripts/check_node_version.js",
-    "postinstall": "npm run requirements-check"
+    "postinstall": "npm run requirements-check",
+    "test": "mocha"
   },
   "dependencies": {
     "cookie-parser": "~1.4.4",
