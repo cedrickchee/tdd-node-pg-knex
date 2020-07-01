@@ -29,11 +29,11 @@ describe('API Routes', () => {
     after(() => knex.destroy());
 
     describe('GET /api/v1/shows', () => {
-        it('should return all shows', (done) => {
-            chai.request(server)
+        it('should return all shows', () => {
+            return chai
+                .request(server)
                 .get('/api/v1/shows')
-                .end((err, res) => {
-                    should.not.exist(err);
+                .then((res) => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('array');
@@ -45,17 +45,19 @@ describe('API Routes', () => {
                         rating: 3,
                         explicit: false,
                     });
-                    done();
+                })
+                .catch((err) => {
+                    throw err;
                 });
         });
     });
 
     describe('GET /api/v1/shows/:id', () => {
-        it('should return a single show', (done) => {
-            chai.request(server)
+        it('should return a single show', () => {
+            return chai
+                .request(server)
                 .get('/api/v1/shows/1')
-                .end((err, res) => {
-                    should.not.exist(err);
+                .then((res) => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -66,14 +68,17 @@ describe('API Routes', () => {
                         rating: 3,
                         explicit: false,
                     });
-                    done();
+                })
+                .catch((err) => {
+                    throw err;
                 });
         });
     });
 
     describe('POST /api/v1/shows', () => {
-        it('should add a show', (done) => {
-            chai.request(server)
+        it('should add a show', () => {
+            return chai
+                .request(server)
                 .post('/api/v1/shows')
                 .send({
                     name: 'Family Guy',
@@ -82,8 +87,7 @@ describe('API Routes', () => {
                     rating: 4,
                     explicit: true,
                 })
-                .end(function (err, res) {
-                    should.not.exist(err);
+                .then((res) => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -92,23 +96,25 @@ describe('API Routes', () => {
                         channel: 'Fox',
                         genre: 'Comedy',
                         rating: 4,
-                        explicit: true
+                        explicit: true,
                     });
-                    done();
+                })
+                .catch((err) => {
+                    throw err;
                 });
         });
     });
 
     describe('PUT /api/v1/shows/:id', () => {
-        it('should update a show', (done) => {
-            chai.request(server)
+        it('should update a show', () => {
+            return chai
+                .request(server)
                 .put('/api/v1/shows/1')
                 .send({
                     rating: 4,
                     explicit: true,
                 })
-                .end((err, res) => {
-                    should.not.exist(err);
+                .then((res) => {
                     res.should.have.status(200);
                     res.should.be.json; // jshint ignore:line
                     res.body.should.be.a('object');
@@ -119,20 +125,22 @@ describe('API Routes', () => {
                         rating: 4,
                         explicit: true,
                     });
-                    done();
+                })
+                .catch((err) => {
+                    throw err;
                 });
         });
 
-        it('should NOT update a show if the id field is part of the request', (done) => {
-            chai.request(server)
+        it('should NOT update a show if the id field is part of the request', () => {
+            return chai
+                .request(server)
                 .put('/api/v1/shows/1')
                 .send({
                     id: 20,
                     rating: 4,
                     explicit: true,
                 })
-                .end((err, res) => {
-                    should.not.exist(err);
+                .then((res) => {
                     res.should.have.status(422);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -140,20 +148,22 @@ describe('API Routes', () => {
                     res.body.error.should.equal(
                         'You cannot update the id field'
                     );
-                    done();
+                })
+                .catch((err) => {
+                    throw err;
                 });
         });
     });
 
     describe('DELETE /api/v1/shows/:id', () => {
-        it('should delete a show', (done) => {
+        it('should delete a show', () => {
             // The test ensure that the deleted show is returned and that the
             // database no longer contains the show.
 
-            chai.request(server)
+            return chai
+                .request(server)
                 .delete('/api/v1/shows/1')
-                .end((err, res) => {
-                    should.not.exist(err);
+                .then((res) => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -165,10 +175,10 @@ describe('API Routes', () => {
                         explicit: false,
                     });
 
-                    chai.request(server)
+                    return chai
+                        .request(server)
                         .get('/api/v1/shows')
-                        .end((err, res) => {
-                            should.not.exist(err);
+                        .then((res) => {
                             res.should.have.status(200);
                             res.should.be.a('object');
                             res.should.be.json;
@@ -181,8 +191,13 @@ describe('API Routes', () => {
                                 rating: 5,
                                 explicit: true,
                             });
-                            done();
+                        })
+                        .catch((err) => {
+                            throw err;
                         });
+                })
+                .catch((err) => {
+                    throw err;
                 });
         });
     });
