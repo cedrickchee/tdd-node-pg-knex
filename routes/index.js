@@ -63,4 +63,26 @@ router.put('/shows/:id', (req, res, next) => {
         });
 });
 
+// Delete show
+router.delete('/shows/:id', (req, res, next) => {
+    // The Knex delete() function returns a number indicating the number of rows
+    // in the database that have been affected, so to return the deleted object,
+    // we must query for it first.
+    queries
+        .getSingle(req.params.id)
+        .then((show) => {
+            queries
+                .deleteItem(req.params.id)
+                .then(() => {
+                    res.status(200).json(show);
+                })
+                .catch((error) => {
+                    next(error);
+                });
+        })
+        .catch((error) => {
+            next(error);
+        });
+});
+
 module.exports = router;
