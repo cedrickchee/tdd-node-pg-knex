@@ -13,15 +13,12 @@ const should = chai.should();
 chai.use(chaiHttp);
 
 describe('API Routes', () => {
-    beforeEach((done) => {
-        console.log('beforeEach');
+    beforeEach(() =>
         knex.migrate
             .rollback()
             .then(() => knex.migrate.latest())
             .then(() => knex.seed.run())
-            .then(() => done())
-            .catch(done);
-    });
+    );
 
     afterEach((done) => {
         knex.migrate.rollback().then(() => {
