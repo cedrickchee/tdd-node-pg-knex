@@ -22,8 +22,13 @@ function add(show) {
     return Shows().insert(show, 'id');
 }
 
+function update(showID, updates) {
+    return Shows().where('id', parseInt(showID)).update(updates);
+}
+
 module.exports = {
     getAll,
     getSingle,
     add,
+    update,
 };

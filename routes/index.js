@@ -32,13 +32,28 @@ router.post('/shows', function (req, res, next) {
     queries
         .add(req.body)
         .then((showID) => {
-          return queries.getSingle(showID);
+            return queries.getSingle(showID);
         })
         .then((show) => {
             res.status(200).json(show);
         })
         .catch((error) => {
-          next(error);
+            next(error);
+        });
+});
+
+// Update show
+router.put('/shows/:id', (req, res, next) => {
+    queries
+        .update(req.params.id, req.body)
+        .then(() => {
+            return queries.getSingle(req.params.id);
+        })
+        .then((show) => {
+            res.status(200).json(show);
+        })
+        .catch((error) => {
+            next(error);
         });
 });
 
