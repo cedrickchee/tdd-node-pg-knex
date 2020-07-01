@@ -14,17 +14,12 @@ chai.use(chaiHttp);
 
 describe('API Routes', () => {
     beforeEach((done) => {
+        console.log('beforeEach');
         knex.migrate
             .rollback()
-            .then(() => {
-                return knex.migrate.latest();
-            })
-            .then(() => {
-                return knex.seed.run();
-            })
-            .then(() => {
-                done();
-            });
+            .then(() => knex.migrate.latest())
+            .then(() => knex.seed.run())
+            .then(() => done());
     });
 
     afterEach((done) => {
