@@ -33,6 +33,7 @@ describe('API Routes', () => {
             chai.request(server)
                 .get('/api/v1/shows')
                 .end((err, res) => {
+                    should.not.exist(err);
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('array');
@@ -57,6 +58,7 @@ describe('API Routes', () => {
             chai.request(server)
                 .get('/api/v1/shows/1')
                 .end((err, res) => {
+                    should.not.exist(err);
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -87,6 +89,7 @@ describe('API Routes', () => {
                     explicit: true,
                 })
                 .end(function (err, res) {
+                    should.not.exist(err);
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -114,6 +117,7 @@ describe('API Routes', () => {
                     explicit: true,
                 })
                 .end((err, res) => {
+                    should.not.exist(err);
                     res.should.have.status(200);
                     res.should.be.json; // jshint ignore:line
                     res.body.should.be.a('object');
@@ -140,6 +144,7 @@ describe('API Routes', () => {
                     explicit: true,
                 })
                 .end((err, res) => {
+                    should.not.exist(err);
                     res.should.have.status(422);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -160,6 +165,7 @@ describe('API Routes', () => {
             chai.request(server)
                 .delete('/api/v1/shows/1')
                 .end((err, res) => {
+                    should.not.exist(err);
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
@@ -177,6 +183,7 @@ describe('API Routes', () => {
                     chai.request(server)
                         .get('/api/v1/shows')
                         .end((err, res) => {
+                            should.not.exist(err);
                             res.should.have.status(200);
                             res.should.be.a('object');
                             res.should.be.json;
