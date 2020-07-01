@@ -19,7 +19,8 @@ describe('API Routes', () => {
             .rollback()
             .then(() => knex.migrate.latest())
             .then(() => knex.seed.run())
-            .then(() => done());
+            .then(() => done())
+            .catch(done);
     });
 
     afterEach((done) => {
