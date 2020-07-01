@@ -11,6 +11,10 @@ The rules of Red/Green/Refactor (RGR) cycle are simple.
 
 > Make it work. Make it right. Make it fast. — Kent Beck's original injunction
 
+**What are we creating?**
+
+This is a test-first approach to developing a RESTful API.
+
 ## Tech Stack
 
 - Database: PostgreSQL
@@ -31,3 +35,7 @@ Debug the app with this command:
 ```sh
 npm run debug
 ```
+
+## Project status
+
+We are not quite done since we are not testing or handling for all possible errors.
