@@ -38,16 +38,13 @@ describe('API Routes', () => {
                     res.should.be.json;
                     res.body.should.be.a('array');
                     res.body.length.should.equal(4);
-                    res.body[0].should.have.property('name');
-                    res.body[0].name.should.equal('Suits');
-                    res.body[0].should.have.property('channel');
-                    res.body[0].channel.should.equal('USA Network');
-                    res.body[0].should.have.property('genre');
-                    res.body[0].genre.should.equal('Drama');
-                    res.body[0].should.have.property('rating');
-                    res.body[0].rating.should.equal(3);
-                    res.body[0].should.have.property('explicit');
-                    res.body[0].explicit.should.equal(false);
+                    res.body[0].should.include({
+                        name: 'Suits',
+                        channel: 'USA Network',
+                        genre: 'Drama',
+                        rating: 3,
+                        explicit: false,
+                    });
                     done();
                 });
         });
@@ -62,16 +59,13 @@ describe('API Routes', () => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.name.should.equal('Suits');
-                    res.body.should.have.property('channel');
-                    res.body.channel.should.equal('USA Network');
-                    res.body.should.have.property('genre');
-                    res.body.genre.should.equal('Drama');
-                    res.body.should.have.property('rating');
-                    res.body.rating.should.equal(3);
-                    res.body.should.have.property('explicit');
-                    res.body.explicit.should.equal(false);
+                    res.body.should.include({
+                        name: 'Suits',
+                        channel: 'USA Network',
+                        genre: 'Drama',
+                        rating: 3,
+                        explicit: false,
+                    });
                     done();
                 });
         });
@@ -93,16 +87,13 @@ describe('API Routes', () => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.name.should.equal('Family Guy');
-                    res.body.should.have.property('channel');
-                    res.body.channel.should.equal('Fox');
-                    res.body.should.have.property('genre');
-                    res.body.genre.should.equal('Comedy');
-                    res.body.should.have.property('rating');
-                    res.body.rating.should.equal(4);
-                    res.body.should.have.property('explicit');
-                    res.body.explicit.should.equal(true);
+                    res.body.should.include({
+                        name: 'Family Guy',
+                        channel: 'Fox',
+                        genre: 'Comedy',
+                        rating: 4,
+                        explicit: true
+                    });
                     done();
                 });
         });
@@ -121,16 +112,13 @@ describe('API Routes', () => {
                     res.should.have.status(200);
                     res.should.be.json; // jshint ignore:line
                     res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.name.should.equal('Suits');
-                    res.body.should.have.property('channel');
-                    res.body.channel.should.equal('USA Network');
-                    res.body.should.have.property('genre');
-                    res.body.genre.should.equal('Drama');
-                    res.body.should.have.property('rating');
-                    res.body.rating.should.equal(4);
-                    res.body.should.have.property('explicit');
-                    res.body.explicit.should.equal(true);
+                    res.body.should.include({
+                        name: 'Suits',
+                        channel: 'USA Network',
+                        genre: 'Drama',
+                        rating: 4,
+                        explicit: true,
+                    });
                     done();
                 });
         });
@@ -169,16 +157,13 @@ describe('API Routes', () => {
                     res.should.have.status(200);
                     res.should.be.json;
                     res.body.should.be.a('object');
-                    res.body.should.have.property('name');
-                    res.body.name.should.equal('Suits');
-                    res.body.should.have.property('channel');
-                    res.body.channel.should.equal('USA Network');
-                    res.body.should.have.property('genre');
-                    res.body.genre.should.equal('Drama');
-                    res.body.should.have.property('rating');
-                    res.body.rating.should.equal(3);
-                    res.body.should.have.property('explicit');
-                    res.body.explicit.should.equal(false);
+                    res.body.should.include({
+                        name: 'Suits',
+                        channel: 'USA Network',
+                        genre: 'Drama',
+                        rating: 3,
+                        explicit: false,
+                    });
 
                     chai.request(server)
                         .get('/api/v1/shows')
@@ -189,16 +174,13 @@ describe('API Routes', () => {
                             res.should.be.json;
                             res.body.should.be.a('array');
                             res.body.length.should.be.equal(3);
-                            res.body[0].should.have.property('name');
-                            res.body[0].name.should.equal('Game of Thrones');
-                            res.body[0].should.have.property('channel');
-                            res.body[0].channel.should.equal('HBO');
-                            res.body[0].should.have.property('genre');
-                            res.body[0].genre.should.equal('Fantasy');
-                            res.body[0].should.have.property('rating');
-                            res.body[0].rating.should.equal(5);
-                            res.body[0].should.have.property('explicit');
-                            res.body[0].explicit.should.equal(true);
+                            res.body[0].should.include({
+                                name: 'Game of Thrones',
+                                channel: 'HBO',
+                                genre: 'Fantasy',
+                                rating: 5,
+                                explicit: true,
+                            });
                             done();
                         });
                 });
