@@ -1,43 +1,45 @@
-// Update with your config settings.
-
 module.exports = {
 
-  development: {
-    client: 'sqlite3',
-    connection: {
-      filename: './dev.sqlite3'
+  test: {
+    client: 'postgresql',
+    connection: 'postgres://localhost/mocha_chai_tv_shows_test',
+    migrations: {
+      directory: __dirname + '/db/migrations'
+    },
+    seeds: {
+      directory: __dirname + '/db/seeds/test'
     }
   },
 
-  staging: {
+  development: {
     client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
+    connection: 'postgres://localhost/mocha_chai_tv_shows',
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
-      tableName: 'knex_migrations'
+      directory: __dirname + '/db/migrations',
+      tableName: 'knex_migrations',
+    },
+    seeds: {
+      directory: __dirname + '/db/seeds/development'
     }
   },
 
   production: {
     client: 'postgresql',
-    connection: {
-      database: 'my_db',
-      user:     'username',
-      password: 'password'
-    },
+    connection: process.env.DATABASE_URL,
     pool: {
       min: 2,
       max: 10
     },
     migrations: {
+      directory: __dirname + '/db/migrations',
       tableName: 'knex_migrations'
+    },
+    seeds: {
+      directory: __dirname + '/db/seeds/production'
     }
   }
 
