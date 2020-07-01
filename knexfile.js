@@ -1,8 +1,10 @@
+require('dotenv').config();
+
 module.exports = {
 
   test: {
     client: 'postgresql',
-    connection: 'postgres://localhost/mocha_chai_tv_shows_test',
+    connection: process.env.DATABASE_URL_TEST,
     migrations: {
       directory: __dirname + '/db/migrations'
     },
@@ -13,7 +15,7 @@ module.exports = {
 
   development: {
     client: 'postgresql',
-    connection: 'postgres://localhost/mocha_chai_tv_shows',
+    connection: process.env.DATABASE_URL_DEV,
     pool: {
       min: 2,
       max: 10
@@ -29,7 +31,7 @@ module.exports = {
 
   production: {
     client: 'postgresql',
-    connection: process.env.DATABASE_URL,
+    connection: process.env.DATABASE_URL_PROD,
     pool: {
       min: 2,
       max: 10
