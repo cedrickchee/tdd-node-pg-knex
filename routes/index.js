@@ -4,7 +4,7 @@ var router = express.Router();
 const queries = require('../db/queries');
 
 /* GET all shows. */
-router.get('/shows', function (req, res, next) {
+router.get('/shows', (req, res, next) => {
     queries
         .getAll()
         .then((shows) => {
@@ -16,7 +16,7 @@ router.get('/shows', function (req, res, next) {
 });
 
 // GET single show.
-router.get('/shows/:id', function (req, res, next) {
+router.get('/shows/:id', (req, res, next) => {
     queries
         .getSingle(req.params.id)
         .then((show) => {
@@ -28,7 +28,7 @@ router.get('/shows/:id', function (req, res, next) {
 });
 
 // Add show
-router.post('/shows', function (req, res, next) {
+router.post('/shows', (req, res, next) => {
     queries
         .add(req.body)
         .then((showID) => {
