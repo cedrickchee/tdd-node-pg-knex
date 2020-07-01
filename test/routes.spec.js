@@ -1,11 +1,14 @@
-process.env.NODE_ENV = 'test';
+process.env.NODE_ENV = 'test'; // sets the NODE_ENV to test so that the correct Knex config is used from knexfile.js
 
 const chai = require('chai');
 const chaiHttp = require('chai-http');
 const server = require('../app');
 
+// We are using the should assertion style. This is a personal preference.
+// You could also use expect or assert.
 const should = chai.should();
 
+// This module allows us make http requests from within our test file.
 chai.use(chaiHttp);
 
 describe('API Routes', () => {
