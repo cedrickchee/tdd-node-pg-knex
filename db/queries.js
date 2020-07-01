@@ -18,7 +18,12 @@ function getSingle(showID) {
     return Shows().where('id', parseInt(showID)).first();
 }
 
+function add(show) {
+    return Shows().insert(show, 'id');
+}
+
 module.exports = {
     getAll,
     getSingle,
+    add,
 };
